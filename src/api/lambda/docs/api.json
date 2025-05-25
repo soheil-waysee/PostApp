@@ -1,0 +1,90 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Shipment Event API",
+    "version": "1.0.0",
+    "description": "API to manage shipment event tracking."
+  },
+  "paths": {
+    "/shipments/{shipmentId}/events": {
+      "post": {
+        "summary": "Record a new event for a specific shipment",
+        "parameters": [
+          { "name": "shipmentId", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "timestamp": { "type": "string", "format": "date-time" },
+                  "status": { "type": "string", "example": "in_transit" },
+                  "location": { "type": "string" },
+                  "details": { "type": "string" }
+                },
+                "required": ["timestamp", "status"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Event recorded successfully" },
+          "400": { "description": "Invalid input" }
+        }
+      },
+      "get": {
+        "summary": "Get full event history for a specific shipment",
+        "parameters": [
+          { "name": "shipmentId", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of shipment events",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/ShipmentEvent" }
+                }
+              }
+            }
+          },
+          "404": { "description": "Shipment not found" }
+        }
+      }
+    },
+    "/shipments/{shipmentId}/events/latest": {
+      "get": {
+        "summary": "Get the most recent event for a specific shipment",
+        "parameters": [
+          { "name": "shipmentId", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Latest shipment event",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/ShipmentEvent" } }
+            }
+          },
+          "404": { "description": "Shipment not found or no events" }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ShipmentEvent": {
+        "type": "object",
+        "properties": {
+          "timestamp": { "type": "string", "format": "date-time" },
+          "status": { "type": "string" },
+          "location": { "type": "string" },
+          "details": { "type": "string" }
+        },
+        "required": ["timestamp", "status"]
+      }
+    }
+  }
+}
