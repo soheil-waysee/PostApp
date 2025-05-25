@@ -36,7 +36,6 @@ export async function getLatestEvent(
   const result = await docClient.send(
     new QueryCommand({
       TableName: tableName,
-      IndexName: 'LatestEventsIndex',
       KeyConditionExpression: 'shipmentId = :shipmentId',
       ExpressionAttributeValues: {
         ':shipmentId': shipmentId,
