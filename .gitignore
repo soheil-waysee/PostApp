@@ -1,8 +1,22 @@
+# JavaScript files
 *.js
 !jest.config.js
-*.d.ts
-node_modules
 
-# CDK asset staging directory
-.cdk.staging
-cdk.out
+# TypeScript declaration files
+*.d.ts
+
+# Node modules
+node_modules/
+
+# CDK asset staging directories
+.cdk.staging/
+cdk.out/
+
+# Build output
+dist/
+coverage/
+
+# Environment files
+.env*
+*.log
+.aws/
