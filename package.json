@@ -5,7 +5,7 @@
     "post-app": "bin/post-app.js"
   },
   "scripts": {
-    "build": "rm -rf dist && tsc && node src/scripts/build-lambdas.js",
+    "build": "rm -rf dist && tsc && node src/scripts/build-lambdas.js && npm run layer:build-all",
     "watch": "tsc -w",
     "deploy": "npm run build && cdk deploy",
     "test": "jest --testPathIgnorePatterns=e2e --testPathPattern=src",
