@@ -17,6 +17,6 @@ dist/
 coverage/
 
 # Environment files
-.env*
+.env
 *.log
 .aws/
