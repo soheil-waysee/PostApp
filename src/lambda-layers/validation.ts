@@ -22,7 +22,7 @@ export function validateAgainstSchema<T>(
   for (const key in schema) {
     const rule = schema[key];
     const value = obj[key];
-    values = { ...values, key: obj[key] };
+    values = { ...values, [key]: obj[key] };
 
     if (rule.required && (value === undefined || value === null || value === '')) {
       errors.push(`${key} is required`);
