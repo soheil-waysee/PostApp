@@ -1,5 +1,3 @@
-# JavaScript files
-*.js
 !jest.config.js
 
 # TypeScript declaration files
